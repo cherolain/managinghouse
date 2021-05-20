@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>statistiche</title>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link th:href="@{/css/csslog.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/js.js}"></script>
+</head>
+<body class="stat">
+    <div class="container-fluid">
+
+        <div class="text-center">
+            <h1 id="titulo">Le tue statistiche</h1>
+
+        <div class="row">
+
+            <div class="text-center col-12  pt-4 sfondo">
+                <div class="tab mt-5">
+                    <table  class="table text-black">
+                        <thead>
+                        <tr>
+                            <th scope="col">Faccende completate <a  class="btn btn-outline-dark " href="#" onclick='show(1);'>Info</a></th>
+                            <th scope="col">Premi riscattati <a  class="btn btn-outline-dark " href="#" onclick='show(2);'>Info</a> </th>
+                            <th scope="col" >I tuoi punti</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="interni" th:object="${utente}">
+
+                            <td th:text="${utente.getTasks().size()}"></td>
+                            <td th:text="${utente.getPremi().size()}"/>
+                            <td th:text="${utente.getPunteggio()}"/>
+
+
+                        </tbody>
+                    </table>
+                    <div id="table1">
+                    <table  class="table text-black">
+                        <thead>
+                        <tr>
+                            <th scope="col">Dettagli faccende</th>
+                            <th scope="col">Punti Acquisiti</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="interni" th:each="task:${utente.getTasks()}">
+
+                                <td th:text="${task.nome}"/>
+                                <td th:text="${task.punti}"/>
+                        </tbody>
+                    </table>
+                    </div>
+                    </table>
+                    <div id="table2">
+                        <table  class="table text-black">
+                            <thead>
+                            <tr>
+                                <th scope="col">Dettagli Premi</th>
+                                <th scope="col">Punti Spesi</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="interni" th:each="p:${utente.getPremi()}">
+
+                                    <td th:text="${p.nome}"/>
+                                    <td th:text="${p.punti}"/>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <br><br><br>
+                <div id="btn" class="my-4 ">
+                    <a href="/">Torna alla Home</a><span id="circle"></span>
+                </div>
+            </div>
+
+            <div class="col-3 ">
+                <img th:src="@{https://2.bp.blogspot.com/-slGXPcJLjXI/W97YM3CdQGI/AAAAAAA1BLY/XNGQ5Z6A0Q80RSKA8wFCYQiVTna8B0yUACLcBGAs/s1600/AW2222446_00.gif}">
+
+            </div>
+        </div>
+
+        </div>
+
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Premi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link th:href="@{/css/csslog.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/js.js}"></script>
+    <script src="https://kit.fontawesome.com/13fb930ce4.js" crossorigin="anonymous"></script>
+<body>
+
+
+<div  class="container-fluid">
+    <div class="text-center">
+    <div class="col-12">
+        <h1 class="titulo text-center">Premi</h1>
+        <div sec:authorize="hasAuthority('Admin')">
+
+            <form class="py-4" th:action="@{/admin/addPremio}" method="post"
+                  th:object="${premio}">
+                <input type="text" placeholder="Premio" th:field="${premio.nome}" required>
+                <input type="number" placeholder="Punti Riscatto" th:field="${premio.punti}" required>
+                <button class="but" type="submit">Aggiungi Premio</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="tabpremio" class=" text-center pt-4">
+        <div class="pt-4" aria-label="prova">
+            <div class="avviso" th:if="${ ins!=null && !ins.isEmpty()}">
+                <div  th:text="${ins}"
+                    class="alert alert-danger" role="alert">
+                </div>
+            </div>
+            <table id="cornice" class="table m-auto text-black">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Premio</th>
+                    <th scope="col" colspan="2">Punti Richiesti</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="fac,useStat:${premi}">
+                    <td th:text="${useStat.count}"/>
+                    <td th:text="${fac.getNome()}"/>
+                    <td th:text="${fac.getPunti()}"/>
+                    <!-- <td th:text="${#temporals.format(user.getBirthday(),'dd-MM-yyyy')}"/>-->
+
+                    <td>
+                        <a class="member text-black"   sec:authorize="hasAuthority('User')"  th:href="@{/user/riscattaPremio(id=${fac.getId()})}"><i class="far fa-money-bill-alt"></i> Riscatta</a>
+                    </td>
+
+                    <td>
+                        <a sec:authorize="hasAuthority('Admin')" class="member text-black" th:href="@{/admin/eliminaPremio(id=${fac.getId()})}">X</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <span th:each="pageNumber : ${#numbers.sequence(0,pageNumbers-1)}">
+                <a class="text-black" th:href="@{/service/aggiungiPremio(page=${pageNumber})}"
+                   th:text="${pageNumber+1}"></a>
+                </span>
+
+        </div>
+
+
+
+    </div>
+        <div id="btn" class="my-4 ">
+            <a href="/">Torna alla Home</a><span id="circle"></span>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+</body>
+</html>
