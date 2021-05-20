@@ -15,6 +15,7 @@ public class Ruolo {
     private String nome;
 
     public Ruolo() {
+
     }
 
     public int getId() {
