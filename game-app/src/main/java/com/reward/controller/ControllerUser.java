@@ -55,6 +55,7 @@ public class ControllerUser {
     }
 
 
+    //just comment for test
     @GetMapping("/visualizzaStat")
     public  String visualizzaStat(@AuthenticationPrincipal UserDetails us, Model model){
 
