@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html  xmlns:th="https://www.thymeleaf.org/"
+       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<head>
+    <meta charset="UTF-8">
+    <title>Visualizza</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link th:href="@{/css/csslog.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/js/js.js}"></script>
+</head>
+<body class="howl">
+
+<div class="container">
+
+        <h1 class="titulo text-center">Statistiche Globali</h1>
+
+    <div class="text-center py-4">
+
+        <div  class="note1 m-auto" aria-label="prova">
+            <p class="lav">Faccende completate <a  class="lav btn btn-outline-dark " href="#" onclick='show(1);'>Info</a></p>
+            <p class="lav">Premi riscattati <a  class="lav btn btn-outline-dark " href="#" onclick='show(2);'>Info</a></p>
+        <div class="px-4 m-auto" style="width:80%">
+            <table id="table1" class="table tableadm m-auto ">
+                <thead >
+                <tr>
+                    <th scope="col">Nome Utente</th>
+                    <th scope="col">Faccende Completate</th>
+
+                </tr>
+                </thead>
+                <tbody class="bd">
+                <tr  th:each="t, ts :${ tasks}">
+                    <td th:text="${t.nome}"/>
+                        <th:block th:if="${!t.getUtenti().isEmpty() && t.getUtenti()!= null}"  th:each="u, use: ${t.getUtenti()}">
+                    <td th:text="${u.nome}"></td>
+                        </th:block>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+            <div class="px-4 m-auto" style="width:80%">
+            <table id="table2" class="table tableadm  text-center m-auto">
+                <thead>
+                <tr>
+                    <th scope="col">Nome Utente</th>
+                    <th scope="col">Premi Riscattati</th>
+                </tr>
+                </thead>
+                <tbody class="bd">
+                <tr th:each="p:${premi}">
+                    <td th:text="${p.nome}"/>
+                    <th:block th:if="${!p.getUtenti().isEmpty() && p.getUtenti()!= null}"  th:each="u: ${p.getUtenti()}">
+                        <td th:text="${u.nome}"></td>
+                    </th:block>
+                </tr>
+                </tbody>
+                    <!-- <td th:text="${#temporals.format(user.getBirthday(),'dd-MM-yyyy')}"/>-->
+
+            </table>
+
+
+
+
+
+    </div>
+            <div class="px-4 m-auto" style="width:80%">
+        <div id="btn" class="my-4">
+            <a href="/">Torna alla Home</a><span id="circle"></span>
+        </div>
+    </div>
+        </div>
+
+
+</div>
+
+
+</body>
+</html>

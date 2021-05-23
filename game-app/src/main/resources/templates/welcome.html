@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html id="pagina" xmlns:th="https://www.thymeleaf.org/"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <!--boostrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link th:href="@{/css/csslog.css}" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+    <div class="container">
+        <h1 class="titulo mt-4 text-center">Olio Di Gomito</h1>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="card">
+                    <form action="#" th:action="@{/authenticateTheUser}" method="POST"  class="box">
+                        <div th:if="${param.error != null}"
+                             class="alert alert-danger" role="alert">
+                              Username o Password errati
+                        </div>
+                        <h1>Login</h1>
+                        <p class="text-muted"> Inserisci Username e Password!</p>
+                        <input type="text" name="username" placeholder="Username">
+                        <input type="password" name="password" placeholder="Password"> <a class="forgot text-muted" href="#">Forgot password?</a>
+                        <button type="submit" class="color-white" name="Login" >Login</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img th:src="@{https://64.media.tumblr.com/387a4e788772eecc8d1ef85213204cb1/tumblr_p8uu1vyK551tw91jio1_r1_500.gifv}">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <!-- JavaScript Bundle with Popper Boostrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>
